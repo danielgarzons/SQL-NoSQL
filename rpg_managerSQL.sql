@@ -121,3 +121,56 @@ INSERT INTO combate (id_atacante, id_defensor, id_ganador)
 VALUES (1,2,1)
 
 SELECT * FROM combate;
+
+
+-- CONSULTAS
+-- Nombre y clase
+SELECT p.nombre AS personaje, c.nombre AS clase
+FROM personaje p
+JOIN clase c ON p.id_clase = c.id_clase;
+
+-- Nombre, item y cantidad
+SELECT p.nombre AS personaje, i.nombre AS objeto, inv.cantidad
+FROM personaje p
+JOIN inventario inv ON p.id_personaje = inv.id_personaje
+JOIN item i ON inv.id_item = i.id_item;
+
+-- Todos los personajes sin importar si tienen item o no en el inventario
+SELECT p.nombre AS personaje, i.nombre AS objeto, inv.cantidad
+FROM personaje p
+LEFT JOIN inventario inv ON p.id_personaje = inv.id_personaje
+LEFT JOIN item i ON inv.id_item = i.id_item;
+
+--- Cantidad total de objetos de cada personaje en la mochila
+SELECT p.nombre AS personaje, SUM(inv.cantidad) AS total_items
+FROM personaje p
+LEFT JOIN inventario inv ON p.id_personaje = inv.id_personaje
+GROUP BY p.id_personaje;
+
+-- Reemplazar NULL por 0
+SELECT p.nombre AS personaje, IFNULL(SUM(inv.cantidad), 0) AS total_items
+FROM personaje p
+LEFT JOIN inventario inv ON p.id_personaje = inv.id_personaje
+GROUP BY p.id_personaje 
+HAVING SUM(inv.cantidad) > 1; 
+-- Solo personajes con +1 objeto en total
+
+
+-- Ranking de mayor a menor según cantidad de objetos, solo el top 1
+SELECT p.nombre AS personaje, IFNULL(SUM(inv.cantidad), 0) AS total_items
+FROM personaje p
+LEFT JOIN inventario inv ON p.id_personaje = inv.id_personaje
+GROUP BY p.id_personaje
+ORDER BY total_items DESC
+LIMIT 1;
+
+-- Reporte de misiones
+SELECT p.nombre AS personaje, COUNT(pm.id_mision) AS misiones_completadas
+FROM personaje p
+LEFT JOIN personaje_mision pm ON p.id_personaje = pm.id_personaje
+AND pm.estado = 'completada'
+GROUP BY p.id_personaje;
+
+
+
+
