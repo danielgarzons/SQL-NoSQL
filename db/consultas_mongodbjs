@@ -1,0 +1,59 @@
+db={
+  "personajes": [
+    {
+      "_id": 1,
+      "nombre": "Merlinda",
+      "clase": "Mago",
+      "nivel": 15,
+      "vida": 80,
+      "mana": 200,
+      "inventario": [
+        {
+          "item": "Báculo Arcano",
+          "tipo": "arma",
+          "valor": 150
+        }
+      ]
+    },
+    {
+      "_id": 2,
+      "nombre": "Kael",
+      "clase": "Mago",
+      "nivel": 8,
+      "vida": 90,
+      "mana": 120,
+      "inventario": []
+    },
+    {
+      "_id": 3,
+      "nombre": "Thorgar",
+      "clase": "Guerrero",
+      "nivel": 20,
+      "vida": 150,
+      "inventario": [
+        {
+          "item": "Hacha de Guerra",
+          "tipo": "arma",
+          "valor": 100
+        }
+      ]
+    }
+  ]
+}
+
+
+db.personajes.update(
+  { _id: 1 },
+  { $inc : { mana: 50 } 
+});
+
+db.personajes.find({
+  "inventario.tipo": "arma"
+});
+
+db.personajes.find({ 
+  nivel: { $gte: 15 } 
+});
+
+
+db.personajes.find({ clase: "Mago" });
