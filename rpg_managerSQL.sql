@@ -55,6 +55,17 @@ CREATE TABLE personaje_mision (
     FOREIGN KEY (id_mision) REFERENCES mision(id_mision)
 );
 
+CREATE TABLE combate (
+    id_combate INT AUTO_INCREMENT PRIMARY KEY,
+    id_atacante INT NOT NULL,
+    id_defensor INT NOT NULL,
+    id_ganador INT,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_atacante) REFERENCES personaje(id_personaje),
+    FOREIGN KEY (id_defensor) REFERENCES personaje(id_personaje),
+    FOREIGN KEY (id_ganador) REFERENCES personaje(id_personaje)
+);
+
 
 -- CLASES Y PERSONAJES
 INSERT INTO clase (nombre, descripcion)
@@ -104,3 +115,9 @@ INSERT INTO personaje_mision (id_personaje, id_mision, estado)
 VALUES (1,1,'aceptada')
 
 SELECT * FROM personaje_mision;
+
+-- ARENA DE COMBATE
+INSERT INTO combate (id_atacante, id_defensor, id_ganador)
+VALUES (1,2,1)
+
+SELECT * FROM combate;
