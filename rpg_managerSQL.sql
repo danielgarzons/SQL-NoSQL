@@ -38,6 +38,14 @@ CREATE TABLE inventario (
     FOREIGN KEY (id_item) REFERENCES item(id_item)
 );
 
+CREATE TABLE mision (
+    id_mision INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL UNIQUE,
+    dificultad ENUM('facil', 'media', 'dificil', 'legendaria') NOT NULL,
+    recompensa_oro DECIMAL(10,2) DEFAULT 0.00 CHECK (recompensa_oro >= 0),
+    nivel_minimo INT DEFAULT 1 CHECK (nivel_minimo BETWEEN 1 AND 100)
+);
+
 
 -- CLASES Y PERSONAJES
 INSERT INTO clase (nombre, descripcion)
@@ -69,3 +77,9 @@ VALUES ('Espada de Hierro', 'arma', 3.50, 15.00),
 		('Pocion de Vida', 'pocion', 0.25, 5.00);
 
 SELECT * FROM item;
+
+-- INVENTARIO
+INSERT INTO inventario (id_personaje, id_item, cantidad)
+VALUES (1,2,3);
+
+SELECT * FROM inventario;
