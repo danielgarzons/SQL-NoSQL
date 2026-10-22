@@ -46,6 +46,15 @@ CREATE TABLE mision (
     nivel_minimo INT DEFAULT 1 CHECK (nivel_minimo BETWEEN 1 AND 100)
 );
 
+CREATE TABLE personaje_mision (
+    id_personaje INT,
+    id_mision INT,
+    estado ENUM('aceptada', 'completada', 'fallida') DEFAULT 'aceptada',
+    PRIMARY KEY (id_personaje, id_mision),
+    FOREIGN KEY (id_personaje) REFERENCES personaje(id_personaje),
+    FOREIGN KEY (id_mision) REFERENCES mision(id_mision)
+);
+
 
 -- CLASES Y PERSONAJES
 INSERT INTO clase (nombre, descripcion)
@@ -83,3 +92,15 @@ INSERT INTO inventario (id_personaje, id_item, cantidad)
 VALUES (1,2,3);
 
 SELECT * FROM inventario;
+
+-- MISION
+INSERT INTO mision (titulo, dificultad, recompensa_oro, nivel_minimo)
+VALUES ('Limpieza de Alcantarillas', 'facil', 20.00, 1)
+
+SELECT * FROM mision;
+
+-- MISION DE PERSONAJE
+INSERT INTO personaje_mision (id_personaje, id_mision, estado)
+VALUES (1,1,'aceptada')
+
+SELECT * FROM personaje_mision;
