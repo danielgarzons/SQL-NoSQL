@@ -19,3 +19,17 @@ CREATE TABLE personaje (
     oro DECIMAL(10,2) DEFAULT 0.00 CHECK (oro >= 0),
     FOREIGN KEY (id_clase) REFERENCES clase(id_clase)
 )
+
+INSERT INTO clase (nombre, descripcion)
+values('Guerrero', 'Especialista en combate cuerpo a cuerpo');
+
+INSERT INTO clase (nombre, descripcion)
+values('Mago', 'Experto en restaurar tu nivel de vida');
+
+INSERT INTO clase (nombre, descripcion)
+values('Arquero', 'Tiene vista y precision de halcon');
+
+SELECT * from clase;
+
+
+INSERT INTO personajes 
