@@ -28,8 +28,17 @@ values('Mago', 'Experto en restaurar tu nivel de vida');
 
 INSERT INTO clase (nombre, descripcion)
 values('Arquero', 'Tiene vista y precision de halcon');
+SELECT * FROM clase;
 
-SELECT * from clase;
+
+INSERT INTO personaje (nombre, id_clase, nivel, vida, oro)
+VALUES ('Maximilian', 1, 10, 100, 50.00),
+       ('Arturo', 2, 5, 80, 25.50);
+SELECT * FROM personaje;
 
 
-INSERT INTO personajes 
+INSERT INTO personaje (nombre, id_clase, nivel, vida, oro)
+VALUES ('Arargan', 1, 99, 100, 50.00);
+
+INSERT INTO personaje (nombre, id_clase, nivel, vida, oro)
+VALUES ('ElFantasma', 99, 10, 100, 50.00);
